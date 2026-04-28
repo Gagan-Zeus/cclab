@@ -1,4 +1,4 @@
-package org.cloudbus.cloudsim.examples;
+package cloudsimm;
 
 import java.text.DecimalFormat;
 import java.util.*;
@@ -11,7 +11,7 @@ import org.cloudbus.cloudsim.provisioners.*;
  * Exp4:
  * One datacenter, one host, two VMs (same config), two cloudlets.
  */
-public class Exp4 {
+public class hgcjgh {
 
 	public static void main(String[] args) {
 		Log.printLine("Starting Exp4...");
@@ -43,13 +43,11 @@ public class Exp4 {
 			Cloudlet cloudlet2 = new Cloudlet(1, 250000, 1, 300, 300, full, full, full);
 			cloudlet2.setUserId(brokerId);
 			cloudletList.add(cloudlet1);
+			cloudlet2.setVmId(vm1.getId());
 			cloudletList.add(cloudlet2);
+			cloudlet2.setVmId(vm2.getId());
 			broker.submitCloudletList(cloudletList);
-
-			// Critical: bind each cloudlet to intended VM; otherwise placement can differ.
-			broker.bindCloudletToVm(cloudlet1.getCloudletId(), vm1.getId());
-			broker.bindCloudletToVm(cloudlet2.getCloudletId(), vm2.getId());
-
+			
 			CloudSim.startSimulation();
 			List<Cloudlet> results = broker.getCloudletReceivedList();
 			CloudSim.stopSimulation();
